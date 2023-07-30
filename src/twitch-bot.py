@@ -3,10 +3,11 @@ import os
 import random
 
 from dotenv import load_dotenv
-from mastermind import Mastermind
 from twitchio.ext import commands
 
-load_dotenv()
+from mastermind import Mastermind
+
+load_dotenv("../.env")
 
 TOKEN = os.getenv("TOKEN")
 CHANNELS = json.loads(os.getenv("CHANNELS"))

@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "mastermind-twitch"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Mastermind game for twitch chat"
+authors = ["Walfask"]
 readme = "README.md"
-packages = []
+license = "MIT"
+packages = ["src"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
