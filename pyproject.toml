@@ -5,10 +5,9 @@ description = "Mastermind game for twitch chat"
 authors = ["Walfask"]
 readme = "README.md"
 license = "MIT"
-packages = ["src"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 twitchio = "^2.6.0"
 python-dotenv = "^1.0.0"
 

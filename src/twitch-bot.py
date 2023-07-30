@@ -7,7 +7,7 @@ from twitchio.ext import commands
 
 from mastermind import Mastermind
 
-load_dotenv("../.env")
+load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 CHANNELS = json.loads(os.getenv("CHANNELS"))
