@@ -11,6 +11,7 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 CHANNELS = json.loads(os.getenv("CHANNELS"))
+LIMITED_CHANNELS = json.loads(os.getenv("LIMITED_CHANNELS"))
 NOT_GAME_MESSAGES = json.loads(os.getenv("MESSAGES"))
 
 
@@ -23,26 +24,28 @@ async def event_ready():
     print(f"Bot is ready! {bot.nick}")
 
 
-@bot.command(name="game")
+@bot.command(name="mastermind")
 @commands.cooldown(rate=1, per=5, bucket=commands.Bucket.channel)
 async def start_game(ctx):
     global channel_game_settings
+
+    if ctx.channel.name in LIMITED_CHANNELS and ctx.author.name not in LIMITED_CHANNELS:
+        await ctx.send("You are not allowed to start a game.")
+        return
+
     if ctx.channel.name in channel_game_settings:
         await ctx.send("A game is already in progress!")
         return
 
     try:
-        if len(ctx.message.content.split()) >= 4:
-            _, num_pegs, num_colors = ctx.message.content.split()
-            allow_duplicate = True
-        elif len(ctx.message.content.split()) == 3:
-            _, num_pegs, num_colors = ctx.message.content.split()
-            allow_duplicate = False
+        content = ctx.message.content.split()
+        if len(ctx.message.content.split()) >= 3:
+            num_pegs = int(content[1])
+            num_colors = int(content[2])
+            allow_duplicate = len(content) >= 4
         else:
             num_pegs, num_colors, allow_duplicate = 4, 6, False
 
-        num_pegs = int(num_pegs)
-        num_colors = int(num_colors)
         channel_game_settings[ctx.channel.name] = Mastermind(num_pegs, num_colors, allow_duplicate)
 
         await ctx.send(
