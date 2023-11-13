@@ -5,7 +5,7 @@ import random
 from dotenv import load_dotenv
 from twitchio.ext import commands
 
-from mastermind import Mastermind
+from mastermind import Mastermind, MastermindDuplicate
 
 load_dotenv()
 
@@ -47,7 +47,9 @@ async def start_game(ctx):
         else:
             num_pegs, num_colors, allow_duplicate = 4, 6, False
 
-        channel_game_settings[ctx.channel.name] = Mastermind(num_pegs, num_colors, allow_duplicate)
+        channel_game_settings[ctx.channel.name] = (
+            MastermindDuplicate(num_pegs, num_colors) if allow_duplicate else Mastermind(num_pegs, num_colors)
+        )
 
         await ctx.send(
             f"""A new Mastermind game has started! Guess the {num_pegs} pegs (code)
