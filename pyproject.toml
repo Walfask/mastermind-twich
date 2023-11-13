@@ -10,12 +10,16 @@ license = "MIT"
 python = "^3.9"
 twitchio = "^2.6.0"
 python-dotenv = "^1.0.0"
-aiocron = "^1.8"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
 ruff = "^0.0.280"
 pre-commit = "^3.3.3"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.3"
+pytest-mock = "^3.12.0"
 
 [build-system]
 requires = ["poetry-core"]

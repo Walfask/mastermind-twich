@@ -2,7 +2,6 @@ import json
 import os
 import random
 
-import aiocron
 from dotenv import load_dotenv
 from twitchio.ext import commands
 
@@ -110,13 +109,6 @@ async def not_game(ctx):
     if ctx.channel.name in OWNER_CHANNELS:
         message = random.choices(NOT_GAME_MESSAGES, k=1)[0]
         await ctx.send(message)
-
-
-@aiocron.crontab("0 11 * * *")
-async def cron_send_daily_message():
-    channel = bot.get_channel(OWNER_CHANNELS[0])
-    message = random.choices(NOT_GAME_MESSAGES, k=1)[0]
-    await channel.send(message)
 
 
 if __name__ == "__main__":
