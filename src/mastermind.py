@@ -27,13 +27,13 @@ class Mastermind:
         wrong = 0
         secret_code_list = list(self.secret_code)
 
-        for i in range(len(guess)):
-            if guess[i] == secret_code_list[i]:
+        wrong = len(set.intersection(set(guess), set(self.secret_code)))
+
+        for i, v in enumerate(guess):
+            if v == secret_code_list[i]:
                 correct += 1
+                wrong -= 1
                 secret_code_list[i] = ""
-            elif guess[i] in secret_code_list:
-                wrong += 1
-                secret_code_list[secret_code_list.index(guess[i])] = ""
 
         self.guesses += 1
         return (correct, wrong)
@@ -47,3 +47,16 @@ class MastermindDuplicate(Mastermind):
         secret = "".join(random.choices(self.possibilities, k=self.num_pegs))
         print(secret)
         return secret
+
+    def check_code(self, guess):
+        correct = 0
+        wrong = 0
+
+        for i, v in enumerate(self.secret_code):
+            if guess[i] == v:
+                correct += 1
+            elif guess[i] in self.secret_code:
+                wrong += 1
+
+        self.guesses += 1
+        return (correct, wrong)

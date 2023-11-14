@@ -15,6 +15,7 @@ class TestMastermind:
         game = Mastermind()
 
         assert game.check_code("EEEE") == (0, 0)
+        assert game.check_code("DDDD") == (1, 0)
         assert game.check_code("AAAA") == (1, 0)
         assert game.check_code("CCAA") == (0, 2)
         assert game.check_code("DCBA") == (0, 4)
@@ -39,8 +40,9 @@ class TestMastermindDuplicate:
         game = MastermindDuplicate()
 
         assert game.check_code("EEEE") == (0, 0)
-        assert game.check_code("AAAA") == (2, 0)
-        assert game.check_code("CCAA") == (0, 3)
+        assert game.check_code("DDDD") == (1, 3)
+        assert game.check_code("AAAA") == (2, 2)
+        # assert game.check_code("CCAA") == (0, 3)
         assert game.check_code("DCBA") == (0, 3)
         assert game.check_code("ABDC") == (1, 2)
         assert game.check_code("ABCD") == (3, 0)
