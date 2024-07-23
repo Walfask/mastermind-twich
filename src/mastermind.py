@@ -48,15 +48,25 @@ class MastermindDuplicate(Mastermind):
         print(secret)
         return secret
 
-    def check_code(self, guess):
+    def check_code(self, guess_raw):
+        secret_code = list(self.secret_code)
+        guess = list(guess_raw)
         correct = 0
         wrong = 0
 
-        for i, v in enumerate(self.secret_code):
+        for i, v in enumerate(secret_code):
             if guess[i] == v:
+                guess[i] = "6"
+                secret_code[i] = "7"
                 correct += 1
-            elif guess[i] in self.secret_code:
+
+        for i, v in enumerate(guess):
+            try:
+                index = secret_code.index(v)
+                secret_code[index] = "3"
                 wrong += 1
+            except ValueError:
+                continue
 
         self.guesses += 1
         return (correct, wrong)
