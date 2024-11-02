@@ -1,29 +1,35 @@
-[tool.poetry]
+[project]
 name = "mastermind-twitch"
-version = "0.1.0"
+version = "0.2.0"
 description = "Mastermind game for twitch chat"
-authors = ["Walfask"]
+authors = [{name = "Walfask"}]
 readme = "README.md"
 license = "MIT"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-twitchio = "^2.6.0"
-python-dotenv = "^1.0.0"
+dependencies = [
+    "twitchio==2.10.0",
+    "python-dotenv==1.0.1",
+]
+requires-python = ">=3.13"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
 ruff = "^0.0.280"
 pre-commit = "^3.3.3"
 
-
-[tool.poetry.group.test.dependencies]
-pytest = "^7.4.3"
-pytest-mock = "^3.12.0"
+[project.optional-dependencies]
+dev = [
+    "pre-commit==4.0.1",
+    "ruff==0.7.2",
+]
+test = [
+    "pytest==8.3.3",
+    "pytest-mock==3.14.0",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.ruff]
 select = ["F", "E", "W", "I001"]
